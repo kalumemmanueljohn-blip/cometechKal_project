@@ -5,12 +5,17 @@ import {
   MapPin,
   Send,
   Clock,
-  Calendar,
   CheckCircle2,
   Sparkles,
   MessageSquare,
   ArrowRight
 } from 'lucide-react'
+
+// ========================================
+// CONFIGURATION API
+// ========================================
+
+const API_URL = import.meta.env.VITE_API_URL || 'https://cometech.onrender.com/api/v1';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -35,8 +40,8 @@ const Contact = () => {
     setStatus(null)
 
     try {
-      // ===== BACKEND NESTJS SUR LE PORT 3001 =====
-      const response = await fetch('http://localhost:3001/api/v1/contact', {
+      // ===== BACKEND SUR RENDER =====
+      const response = await fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -49,6 +54,8 @@ const Contact = () => {
         }),
       })
 
+      const result = await response.json()
+
       if (response.ok) {
         setStatus('success')
         setFormData({
@@ -60,10 +67,14 @@ const Contact = () => {
           service_type: '',
           message: '',
         })
+        // Réinitialiser le message après 5 secondes
+        setTimeout(() => setStatus(null), 5000)
       } else {
+        console.error('Erreur API:', result)
         setStatus('error')
       }
-    } catch {
+    } catch (error) {
+      console.error('Erreur de connexion:', error)
       setStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -278,7 +289,7 @@ const Contact = () => {
                 }}>
                   <CheckCircle2 size={18} style={{ color: '#d4a853', flexShrink: 0 }} />
                   <p style={{ fontSize: '0.9rem', color: '#d4a853', margin: 0 }}>
-                    Votre demande a été envoyée avec succès ! Nous vous contacterons sous 48h.
+                    ✅ Votre demande a été envoyée avec succès ! Vous recevrez un email de confirmation.
                   </p>
                 </div>
               )}
@@ -296,7 +307,7 @@ const Contact = () => {
                 }}>
                   <MessageSquare size={18} style={{ color: '#ef4444', flexShrink: 0 }} />
                   <p style={{ fontSize: '0.9rem', color: '#ef4444', margin: 0 }}>
-                    Une erreur est survenue. Veuillez réessayer ou nous contacter directement.
+                    ❌ Une erreur est survenue. Veuillez réessayer ou nous contacter directement.
                   </p>
                 </div>
               )}

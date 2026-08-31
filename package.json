@@ -1,9 +1,11 @@
 {
   "name": "cometech-project",
+  "version": "1.0.0",
   "scripts": {
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build": "cd frontend && npm install && npm run build",
+    "dev": "cd frontend && npm run dev",
     "dev:backend": "cd backend-typescript && npm run start:dev",
-    "dev:frontend": "cd frontend && npm run dev"
+    "dev:all": "concurrently \"npm run dev:backend\" \"npm run dev\""
   },
   "devDependencies": {
     "concurrently": "^8.2.2"

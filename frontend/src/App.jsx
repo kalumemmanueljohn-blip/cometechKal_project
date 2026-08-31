@@ -24,8 +24,13 @@ import {
   Star,
   Sparkles
 } from 'lucide-react'
-import dashboardMockup from './assets/dashboard-mockup.svg'
 import './App.css'
+
+// ========================================
+// CONFIGURATION API
+// ========================================
+
+const API_URL = import.meta.env.VITE_API_URL || 'https://cometech.onrender.com/api/v1';
 
 // ========================================
 // PARTICULES GLOBALES
@@ -212,7 +217,7 @@ const useScrollAnimation = () => {
 }
 
 // ========================================
-// HEADER - Avec logo agrandi et nom en majuscules
+// HEADER
 // ========================================
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -1206,7 +1211,7 @@ const Guarantees = () => {
 }
 
 // ========================================
-// CONTACT - Version corrigée pour NestJS
+// CONTACT - AVEC API RENDER
 // ========================================
 const Contact = () => {
   useScrollAnimation()
@@ -1232,8 +1237,7 @@ const Contact = () => {
     setStatus(null)
 
     try {
-      // ===== BACKEND NESTJS SUR LE PORT 3001 =====
-      const response = await fetch('http://localhost:3001/api/v1/contact', {
+      const response = await fetch(`${API_URL}/contact`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1246,6 +1250,8 @@ const Contact = () => {
         }),
       })
 
+      const result = await response.json()
+
       if (response.ok) {
         setStatus('success')
         setFormData({
@@ -1256,10 +1262,14 @@ const Contact = () => {
           service_type: '',
           message: '',
         })
+        // Réinitialiser le message de succès après 5 secondes
+        setTimeout(() => setStatus(null), 5000)
       } else {
+        console.error('Erreur API:', result)
         setStatus('error')
       }
-    } catch {
+    } catch (error) {
+      console.error('Erreur de connexion:', error)
       setStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -1417,10 +1427,14 @@ const Contact = () => {
             </button>
 
             {status === 'success' && (
-              <p className="mt-2 text-gold text-center text-xs">Votre demande a été envoyée avec succès !</p>
+              <p className="mt-2 text-gold text-center text-xs">
+                ✅ Votre demande a été envoyée avec succès ! Vous recevrez un email de confirmation.
+              </p>
             )}
             {status === 'error' && (
-              <p className="mt-2 text-red-400 text-center text-xs">Une erreur est survenue. Veuillez réessayer.</p>
+              <p className="mt-2 text-red-400 text-center text-xs">
+                ❌ Une erreur est survenue. Veuillez réessayer ou nous contacter directement par téléphone.
+              </p>
             )}
           </form>
 

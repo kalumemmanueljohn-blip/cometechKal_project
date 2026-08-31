@@ -35,10 +35,18 @@ const Contact = () => {
     setStatus(null)
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/contact/', {
+      // ===== BACKEND NESTJS SUR LE PORT 3001 =====
+      const response = await fetch('http://localhost:3001/api/v1/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          firstName: formData.first_name,
+          lastName: formData.last_name,
+          email: formData.email,
+          phone: formData.phone,
+          serviceType: formData.service_type,
+          message: formData.message,
+        }),
       })
 
       if (response.ok) {
@@ -91,7 +99,6 @@ const Contact = () => {
     { label: 'Autre projet', value: 'autre' },
   ]
 
-  // Jours de la semaine avec horaires
   const schedule = [
     { day: 'Lundi', start: '09:00', end: '18:00', status: 'open' },
     { day: 'Mardi', start: '09:00', end: '18:00', status: 'open' },
@@ -102,26 +109,19 @@ const Contact = () => {
     { day: 'Dimanche', start: 'Fermé', end: '', status: 'closed' },
   ]
 
-  // Vérifier si actuellement ouvert (simplifié)
   const now = new Date()
-  const dayOfWeek = now.getDay() // 0 = Dimanche, 1 = Lundi, ...
+  const dayOfWeek = now.getDay()
   const currentHour = now.getHours()
   const currentMinute = now.getMinutes()
   const currentTime = currentHour + currentMinute / 60
 
   const isOpenToday = () => {
-    if (dayOfWeek === 0) return false // Dimanche
-    if (dayOfWeek === 6) {
-      // Samedi : ouvert jusqu'à 13h
-      return currentTime < 13
-    }
-    // Lundi - Vendredi : ouvert jusqu'à 18h
+    if (dayOfWeek === 0) return false
+    if (dayOfWeek === 6) return currentTime < 13
     return currentTime >= 9 && currentTime < 18
   }
 
   const openStatus = isOpenToday()
-
-  // Déterminer le jour actuel en français
   const daysInFrench = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi']
   const currentDay = daysInFrench[dayOfWeek]
 
@@ -368,9 +368,7 @@ const Contact = () => {
               })}
             </div>
 
-            {/* ============================================================ */}
-            {/* CARTE DISPONIBILITÉ - VERSION PREMIUM */}
-            {/* ============================================================ */}
+            {/* Carte disponibilité */}
             <div
               className="card"
               style={{
@@ -381,7 +379,6 @@ const Contact = () => {
                 overflow: 'hidden',
               }}
             >
-              {/* Décoration de fond */}
               <div
                 style={{
                   position: 'absolute',
@@ -407,7 +404,6 @@ const Contact = () => {
                 }}
               />
 
-              {/* En-tête */}
               <div
                 style={{
                   display: 'flex',
@@ -460,7 +456,6 @@ const Contact = () => {
                   </div>
                 </div>
 
-                {/* Badge statut actuel */}
                 <div
                   style={{
                     display: 'flex',
@@ -499,7 +494,6 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Grille des horaires */}
               <div
                 style={{
                   display: 'grid',
@@ -508,8 +502,6 @@ const Contact = () => {
                 }}
               >
                 {schedule.map((item, index) => {
-                  const isOpen = item.status === 'open'
-                  const isHalf = item.status === 'half'
                   const isClosed = item.status === 'closed'
                   const isToday = currentDay === item.day
 
@@ -569,16 +561,6 @@ const Contact = () => {
                         >
                           Fermé
                         </span>
-                      ) : isHalf ? (
-                        <span
-                          style={{
-                            fontSize: '0.7rem',
-                            fontWeight: 600,
-                            color: '#d4a853',
-                          }}
-                        >
-                          {item.start} - {item.end}
-                        </span>
                       ) : (
                         <span
                           style={{
@@ -595,7 +577,6 @@ const Contact = () => {
                 })}
               </div>
 
-              {/* Informations supplémentaires */}
               <div
                 style={{
                   marginTop: '16px',
@@ -662,7 +643,6 @@ const Contact = () => {
                 </span>
               </div>
 
-              {/* Aujourd'hui */}
               <div
                 style={{
                   marginTop: '12px',
@@ -717,32 +697,6 @@ const Contact = () => {
                     <p style={{ fontSize: '0.7rem', color: '#5a6480', margin: 0 }}>
                       Nous sommes disponibles pour vous répondre
                     </p>
-                    // Dans la carte disponibilité
-<div
-  className="card card-3d glow-border"
-  style={{
-    padding: '18px 16px',
-    background: 'linear-gradient(145deg, rgba(13, 20, 33, 0.95), rgba(8, 12, 20, 0.9))',
-    border: '1px solid rgba(212, 168, 83, 0.04)',
-    position: 'relative',
-    overflow: 'hidden',
-    transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-  }}
->
-  {/* Effet de lumière au survol */}
-  <div
-    className="glow-dot"
-    style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}
-    onMouseMove={(e) => {
-      const rect = e.currentTarget.parentElement.getBoundingClientRect()
-      const x = ((e.clientX - rect.left) / rect.width) * 100
-      const y = ((e.clientY - rect.top) / rect.height) * 100
-      e.currentTarget.style.setProperty('--mouse-x', `${x}%`)
-      e.currentTarget.style.setProperty('--mouse-y', `${y}%`)
-    }}
-  />
-  {/* ... contenu ... */}
-</div>
                   </div>
                 </div>
                 <a
@@ -773,7 +727,6 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* Animation pulse */}
       <style>{`
         @keyframes pulse {
           0%, 100% { opacity: 1; }

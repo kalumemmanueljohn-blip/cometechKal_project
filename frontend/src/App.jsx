@@ -130,16 +130,16 @@ const SplashScreen = ({ onComplete }) => {
         <img
           src="/images/logo-cometech.png"
           alt="Cometech"
-          style={{ width: '120px', height: '120px', objectFit: 'contain' }}
+          style={{ width: '160px', height: '160px', objectFit: 'contain' }}
           onError={(e) => {
             e.target.style.display = 'none'
             const parent = e.target.parentElement
             const fallback = document.createElement('div')
             fallback.style.cssText = `
-              width: 120px; height: 120px; border-radius: 50%;
+              width: 160px; height: 160px; border-radius: 50%;
               background: linear-gradient(135deg, #d4a853, #e8c170);
               display: flex; align-items: center; justify-content: center;
-              font-size: 3rem; font-weight: 800; color: #0a0e17;
+              font-size: 4rem; font-weight: 800; color: #0a0e17;
               font-family: Poppins, sans-serif;
             `
             fallback.textContent = 'C'
@@ -148,12 +148,12 @@ const SplashScreen = ({ onComplete }) => {
         />
       </div>
 
-      <h1 style={{ marginTop: '20px', fontSize: '2rem', fontWeight: 700, color: '#ffffff', fontFamily: 'Poppins, sans-serif', letterSpacing: '0.05em' }}>
-        <span style={{ color: '#d4a853' }}>Cometech</span>
+      <h1 style={{ marginTop: '20px', fontSize: '3rem', fontWeight: 700, color: '#ffffff', fontFamily: 'Poppins, sans-serif', letterSpacing: '0.05em' }}>
+        <span style={{ color: '#d4a853' }}>COMETECH</span>
       </h1>
 
-      <p style={{ marginTop: '4px', fontSize: '0.7rem', color: '#5a6480', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
-        Données · Dynamique · Performance
+      <p style={{ marginTop: '4px', fontSize: '0.8rem', color: '#5a6480', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+        DONNÉES · DYNAMIQUE · PERFORMANCE
       </p>
 
       <div style={{ marginTop: '30px', width: '200px', height: '2px', background: 'rgba(212, 168, 83, 0.1)', borderRadius: '9999px', overflow: 'hidden', position: 'relative' }}>
@@ -212,7 +212,7 @@ const useScrollAnimation = () => {
 }
 
 // ========================================
-// HEADER
+// HEADER - Avec logo agrandi et nom en majuscules
 // ========================================
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -250,7 +250,7 @@ const Header = () => {
         left: 0,
         right: 0,
         zIndex: 9999,
-        height: '70px',
+        height: '80px',
         backgroundColor: '#0a0e17',
         borderBottom: '1px solid rgba(212, 168, 83, 0.1)',
         transition: 'all 0.3s ease',
@@ -265,16 +265,16 @@ const Header = () => {
             <img
               src="/images/logo-cometech.png"
               alt="Cometech"
-              style={{ height: '40px', width: 'auto', transition: 'transform 0.3s ease' }}
+              style={{ height: '55px', width: 'auto', transition: 'transform 0.3s ease' }}
               className="hover:scale-105"
               onError={(e) => { e.target.style.display = 'none' }}
             />
             <div>
-              <span className="text-sm font-bold tracking-tight text-white">
-                <span className="text-gold">Cometech</span>
+              <span className="text-xl font-bold tracking-tight text-white">
+                <span className="text-gold">COMETECH</span>
               </span>
-              <p className="text-[7px] text-gray-400 tracking-widest uppercase hidden sm:block">
-                Données · Dynamique · Performance
+              <p className="text-[10px] text-gray-400 tracking-widest uppercase hidden sm:block">
+                DONNÉES · DYNAMIQUE · PERFORMANCE
               </p>
             </div>
           </a>
@@ -305,7 +305,7 @@ const Header = () => {
         </div>
 
         {isOpen && (
-          <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
+          <div style={{ position: 'absolute', top: '80px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -331,7 +331,7 @@ const Header = () => {
 }
 
 // ========================================
-// HERO - Avec graphique animé (corrigé)
+// HERO
 // ========================================
 const Hero = () => {
   const [isVisible, setIsVisible] = React.useState(false)
@@ -369,7 +369,7 @@ const Hero = () => {
   return (
     <section
       className="min-h-[90vh] flex items-center relative overflow-hidden"
-      style={{ paddingTop: '70px' }}
+      style={{ paddingTop: '80px' }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-light to-dark" />
       
@@ -392,7 +392,6 @@ const Hero = () => {
 
       <div className="container relative z-10">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-          {/* Texte */}
           <div>
             <div
               className={`inline-flex items-center gap-2.5 bg-gradient-to-r from-gold/10 to-gold/5 border border-gold/15 rounded-full px-4 py-1.5 mb-5 transition-all duration-700 shadow-[0_0_30px_rgba(212,168,83,0.03)] ${
@@ -494,7 +493,6 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* ===== DASHBOARD AVEC GRAPHIQUE ANIMÉ ===== */}
           <div
             className={`transition-all duration-1000 delay-300 ${
               isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-12'
@@ -524,7 +522,6 @@ const Hero = () => {
                 }}
               />
 
-              {/* En-tête dashboard */}
               <div style={{
                 display: 'flex',
                 alignItems: 'center',
@@ -548,7 +545,6 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Statistiques */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(4, 1fr)',
@@ -569,7 +565,6 @@ const Hero = () => {
                 ))}
               </div>
 
-              {/* ===== GRAPHIQUE ANIMÉ (CORRIGÉ) ===== */}
               <div style={{
                 background: 'rgba(8, 12, 20, 0.4)',
                 borderRadius: '10px',
@@ -644,7 +639,6 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Sources de trafic */}
               <div style={{
                 display: 'grid',
                 gridTemplateColumns: '1fr 1fr',
@@ -682,7 +676,6 @@ const Hero = () => {
                   </div>
                 </div>
                 
-                {/* Satisfaction */}
                 <div style={{
                   background: 'rgba(8, 12, 20, 0.4)',
                   borderRadius: '8px',
@@ -770,7 +763,6 @@ const Services = () => {
   return (
     <section id="services" className="section section-dark">
       <div className="container">
-        {/* ===== EN-TÊTE CENTRÉ COMME WHYUS ===== */}
         <div style={{ textAlign: 'center', maxWidth: '768px', margin: '0 auto 48px' }}>
           <span className="section-badge reveal">Services</span>
           <h2 className="section-title reveal">
@@ -1214,7 +1206,7 @@ const Guarantees = () => {
 }
 
 // ========================================
-// CONTACT - Version corrigée pour mobile
+// CONTACT - Version corrigée pour NestJS
 // ========================================
 const Contact = () => {
   useScrollAnimation()
@@ -1240,10 +1232,18 @@ const Contact = () => {
     setStatus(null)
 
     try {
-      const response = await fetch('http://localhost:8000/api/v1/contact/', {
+      // ===== BACKEND NESTJS SUR LE PORT 3001 =====
+      const response = await fetch('http://localhost:3001/api/v1/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          firstName: formData.first_name,
+          lastName: formData.last_name,
+          email: formData.email,
+          phone: formData.phone,
+          serviceType: formData.service_type,
+          message: formData.message,
+        }),
       })
 
       if (response.ok) {
@@ -1312,7 +1312,6 @@ const Contact = () => {
         </div>
 
         <div style={{ maxWidth: '800px', margin: '0 auto' }}>
-          {/* Formulaire */}
           <form onSubmit={handleSubmit} className="card reveal" style={{ padding: '24px 18px' }}>
             <h3 className="text-base sm:text-lg font-bold mb-4" style={{ fontSize: '1.05rem' }}>
               Demande de devis
@@ -1425,10 +1424,7 @@ const Contact = () => {
             )}
           </form>
 
-          {/* Coordonnées + Horaires - Version corrigée pour mobile */}
           <div style={{ marginTop: '16px', display: 'grid', gridTemplateColumns: '1fr', gap: '14px' }}>
-            
-            {/* Coordonnées */}
             <div className="card reveal" style={{ padding: '18px 14px' }}>
               <h3 className="text-sm font-bold mb-3" style={{ fontSize: '0.95rem' }}>
                 Coordonnées
@@ -1458,7 +1454,6 @@ const Contact = () => {
               })}
             </div>
 
-            {/* Horaires - Version compacte */}
             <div
               className="card reveal"
               style={{
@@ -1628,7 +1623,6 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Bandeau appel */}
           <div style={{ marginTop: '14px' }}>
             <div className="card reveal" style={{ padding: '8px 12px', background: 'linear-gradient(135deg, rgba(13, 20, 33, 0.9), rgba(13, 20, 33, 0.6))', border: '1px solid rgba(212, 168, 83, 0.04)' }}>
               <div style={{
@@ -1675,7 +1669,7 @@ const Contact = () => {
 }
 
 // ========================================
-// FOOTER - Avec Mentions légales
+// FOOTER
 // ========================================
 const Footer = () => {
   const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' })
@@ -1686,19 +1680,17 @@ const Footer = () => {
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '28px', paddingBottom: '28px', borderBottom: '1px solid rgba(212, 168, 83, 0.06)' }} className="footer-grid">
           
-          {/* Brand */}
           <div style={{ textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
               <img src="/images/logo-cometech.png" alt="Cometech" style={{ height: '40px', width: 'auto' }} onError={(e) => { e.target.style.display = 'none' }} />
-              <span style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff' }}>
-                <span style={{ color: '#d4a853' }}>Cometech</span>
+              <span style={{ fontSize: '22px', fontWeight: 700, color: '#ffffff' }}>
+                <span style={{ color: '#d4a853' }}>COMETECH</span>
               </span>
             </div>
             <p style={{ color: '#d4a853', fontSize: '13px', marginBottom: '2px', fontWeight: 500, letterSpacing: '0.03em' }}>Données. Dynamique. Performance.</p>
             <p style={{ color: '#d4a853', fontSize: '10px', letterSpacing: '0.05em', opacity: 0.6 }}>Analyser · Concevoir · Développer · Déployer</p>
           </div>
 
-          {/* Services */}
           <div style={{ textAlign: 'center' }}>
             <h4 style={{ color: '#ffffff', fontSize: '13px', fontWeight: 600, marginBottom: '10px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Services</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -1712,7 +1704,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Contact */}
           <div style={{ textAlign: 'center' }}>
             <h4 style={{ color: '#ffffff', fontSize: '13px', fontWeight: 600, marginBottom: '10px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Contact</h4>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
@@ -1723,7 +1714,6 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Newsletter */}
           <div style={{ textAlign: 'center' }}>
             <h4 style={{ color: '#ffffff', fontSize: '13px', fontWeight: 600, marginBottom: '8px', letterSpacing: '0.05em', textTransform: 'uppercase' }}>Newsletter</h4>
             <p style={{ color: '#5a6480', fontSize: '12px', marginBottom: '10px' }}>Recevez nos actualités.</p>
@@ -1736,13 +1726,11 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bas de page avec Mentions légales */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', paddingTop: '16px' }}>
           <p style={{ color: '#3a4258', fontSize: '11px', margin: 0, textAlign: 'center' }}>
-            &copy; {new Date().getFullYear()} Cometech. Tous droits réservés.
+            &copy; {new Date().getFullYear()} COMETECH. Tous droits réservés.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
-            {/* Mentions légales - Ouvre une modale */}
             <button
               onClick={() => setShowLegal(true)}
               style={{
@@ -1807,7 +1795,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* ===== MODALE MENTIONS LÉGALES ===== */}
       {showLegal && (
         <div
           style={{
@@ -1840,7 +1827,6 @@ const Footer = () => {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Bouton fermer */}
             <button
               onClick={() => setShowLegal(false)}
               style={{
@@ -1869,7 +1855,7 @@ const Footer = () => {
               <div>
                 <h3 style={{ color: '#ffffff', fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>1. Éditeur du site</h3>
                 <p>
-                  <strong style={{ color: '#d4a853' }}>Cometech</strong><br />
+                  <strong style={{ color: '#d4a853' }}>COMETECH</strong><br />
                   Siège social : Kinshasa, République Démocratique du Congo<br />
                   Email : <a href="mailto:kalumemmaueljohn@gmail.com" style={{ color: '#d4a853', textDecoration: 'none' }}>kalumemmaueljohn@gmail.com</a><br />
                   Téléphone : +243 859 323 184
@@ -1881,38 +1867,35 @@ const Footer = () => {
                 <p>
                   Le site est hébergé par :<br />
                   <strong style={{ color: '#d4a853' }}>Vercel</strong><br />
-                  Adresse : 340 S Lemon Ave #4133, Walnut, CA 91789, USA<br />
-                  Site web : <a href="https://vercel.com" target="_blank" rel="noopener noreferrer" style={{ color: '#d4a853', textDecoration: 'none' }}>vercel.com</a>
+                  Adresse : 340 S Lemon Ave #4133, Walnut, CA 91789, USA
                 </p>
               </div>
 
               <div>
                 <h3 style={{ color: '#ffffff', fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>3. Propriété intellectuelle</h3>
                 <p>
-                  L'ensemble des contenus présents sur ce site (textes, images, graphismes, logos, vidéos, etc.) sont la propriété exclusive de <strong style={{ color: '#d4a853' }}>Cometech</strong>.<br /><br />
-                  Toute reproduction, représentation, modification, publication, adaptation de tout ou partie des éléments du site, quel que soit le moyen ou le procédé utilisé, est interdite, sauf autorisation écrite préalable de <strong style={{ color: '#d4a853' }}>Cometech</strong>.
+                  L'ensemble des contenus présents sur ce site sont la propriété exclusive de <strong style={{ color: '#d4a853' }}>COMETECH</strong>.
                 </p>
               </div>
 
               <div>
                 <h3 style={{ color: '#ffffff', fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>4. Données personnelles</h3>
                 <p>
-                  Conformément à la loi sur la protection des données, vous disposez d'un droit d'accès, de rectification, de modification et de suppression des données vous concernant.<br /><br />
-                  Pour exercer ce droit, veuillez nous contacter à l'adresse suivante : <a href="mailto:kalumemmaueljohn@gmail.com" style={{ color: '#d4a853', textDecoration: 'none' }}>kalumemmaueljohn@gmail.com</a>
+                  Conformément à la loi sur la protection des données, vous disposez d'un droit d'accès, de rectification, de modification et de suppression des données vous concernant.
                 </p>
               </div>
 
               <div>
                 <h3 style={{ color: '#ffffff', fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>5. Responsabilité</h3>
                 <p>
-                  <strong style={{ color: '#d4a853' }}>Cometech</strong> met tout en œuvre pour fournir des informations aussi précises que possible. Cependant, nous ne pouvons garantir l'exactitude, la complétude ou l'actualité des informations diffusées sur ce site.
+                  <strong style={{ color: '#d4a853' }}>COMETECH</strong> met tout en œuvre pour fournir des informations aussi précises que possible.
                 </p>
               </div>
 
               <div>
                 <h3 style={{ color: '#ffffff', fontSize: '1rem', fontWeight: 600, marginBottom: '6px' }}>6. Cookies</h3>
                 <p>
-                  Ce site n'utilise pas de cookies à des fins de suivi. Seuls les cookies techniques nécessaires au bon fonctionnement du site sont utilisés.
+                  Ce site n'utilise pas de cookies à des fins de suivi.
                 </p>
               </div>
 
@@ -1935,10 +1918,6 @@ const Footer = () => {
         @media (min-width: 1024px) { .footer-grid > div:first-child > div { justify-content: flex-start !important; } }
         @media (min-width: 1024px) { .footer-grid > div ul li { justify-content: flex-start !important; } }
         @media (min-width: 1024px) { .footer-grid > div form { margin: 0 !important; } }
-        /* Scrollbar de la modale */
-        .modal-content::-webkit-scrollbar { width: 4px; }
-        .modal-content::-webkit-scrollbar-track { background: #0d1421; }
-        .modal-content::-webkit-scrollbar-thumb { background: #d4a853; border-radius: 9999px; }
       `}</style>
     </footer>
   )

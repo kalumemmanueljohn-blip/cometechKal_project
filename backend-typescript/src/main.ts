@@ -287,31 +287,52 @@ export class AppModule {}
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
-  // CORS pour autoriser Vercel et le développement local
+  // ==========================================
+  // CONFIGURATION CORS COMPLÈTE - RÉSOLUTION DÉFINITIVE
+  // ==========================================
+  
   app.enableCors({
-    origin: [
-      'https://cometech-kal-project.vercel.app',
-      'https://cometech.onrender.com',
-      'http://localhost:5173',
-      'http://localhost:3000',
-      'https://cometech-fuamkmuuh-kalumemmanueljohn-blips-projects.vercel.app',
-    ],
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    // Accepter toutes les origines (solution la plus simple)
+    origin: true,
+    
+    // Méthodes autorisées
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'],
+    
+    // Autoriser les cookies/sessions
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    
+    // Headers autorisés
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
+    
+    // Headers exposés au client
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+    
+    // Durée de cache des preflight requests (24 heures)
+    maxAge: 86400,
   });
   
-  // Préfixe global pour toutes les routes
+  // ==========================================
+  // PREFIXE GLOBAL POUR TOUTES LES ROUTES
+  // ==========================================
   app.setGlobalPrefix(API_PREFIX);
   
-  // Port dynamique pour Render (ou 3001 en local)
+  // ==========================================
+  // DÉMARRAGE DU SERVEUR
+  // ==========================================
   const port = process.env.PORT || 3001;
   await app.listen(port, '0.0.0.0');
   
+  console.log('='.repeat(50));
   console.log(`🚀 Backend running on http://localhost:${port}`);
   console.log(`📡 API prefix: /${API_PREFIX}`);
-  console.log(`📧 Service email activé (Gmail)`);
-  console.log(`✅ CORS configuré pour Vercel`);
+  console.log(`📧 Service email: ${process.env.EMAIL_USER || 'kalumemmanueljohn@gmail.com'}`);
+  console.log(`✅ CORS: Permissif (toutes les origines autorisées)`);
+  console.log('='.repeat(50));
+  console.log('📋 Routes disponibles:');
+  console.log(`  GET  /${API_PREFIX}/services`);
+  console.log(`  POST /${API_PREFIX}/contact`);
+  console.log(`  GET  /${API_PREFIX}/statistics`);
+  console.log('='.repeat(50));
 }
 
 bootstrap();

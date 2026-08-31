@@ -288,33 +288,22 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   
   // ==========================================
-  // CONFIGURATION CORS COMPLÈTE - RÉSOLUTION DÉFINITIVE
+  // ✅ CONFIGURATION CORS COMPLÈTE
   // ==========================================
   
   app.enableCors({
-    // Accepter toutes les origines (solution la plus simple)
-    origin: true,
-    
-    // Méthodes autorisées
+    origin: true,  // ✅ Accepte toutes les origines
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS', 'HEAD'],
-    
-    // Autoriser les cookies/sessions
     credentials: true,
-    
-    // Headers autorisés
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept', 'X-Requested-With'],
-    
-    // Headers exposés au client
     exposedHeaders: ['Content-Range', 'X-Content-Range'],
-    
-    // Durée de cache des preflight requests (24 heures)
     maxAge: 86400,
   });
   
   // ==========================================
-  // PREFIXE GLOBAL POUR TOUTES LES ROUTES
+  // ✅ PREFIXE GLOBAL POUR TOUTES LES ROUTES
   // ==========================================
-  app.setGlobalPrefix(API_PREFIX);
+  app.setGlobalPrefix(API_PREFIX);  // ✅ Ceci DOIT être présent
   
   // ==========================================
   // DÉMARRAGE DU SERVEUR
@@ -322,17 +311,20 @@ async function bootstrap() {
   const port = process.env.PORT || 3001;
   await app.listen(port, '0.0.0.0');
   
-  console.log('='.repeat(50));
+  console.log('='.repeat(60));
   console.log(`🚀 Backend running on http://localhost:${port}`);
   console.log(`📡 API prefix: /${API_PREFIX}`);
   console.log(`📧 Service email: ${process.env.EMAIL_USER || 'kalumemmanueljohn@gmail.com'}`);
   console.log(`✅ CORS: Permissif (toutes les origines autorisées)`);
-  console.log('='.repeat(50));
+  console.log('='.repeat(60));
   console.log('📋 Routes disponibles:');
-  console.log(`  GET  /${API_PREFIX}/services`);
-  console.log(`  POST /${API_PREFIX}/contact`);
-  console.log(`  GET  /${API_PREFIX}/statistics`);
-  console.log('='.repeat(50));
+  console.log(`  ✅ GET  /${API_PREFIX}/services    → Liste des services`);
+  console.log(`  ✅ POST /${API_PREFIX}/contact     → Envoyer un message`);
+  console.log(`  ✅ GET  /${API_PREFIX}/statistics  → Statistiques`);
+  console.log('='.repeat(60));
+  console.log('🌍 En production, utilisez:');
+  console.log(`  https://cometech.onrender.com/${API_PREFIX}/contact`);
+  console.log('='.repeat(60));
 }
 
 bootstrap();

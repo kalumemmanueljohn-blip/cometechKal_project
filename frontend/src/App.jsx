@@ -868,11 +868,11 @@ const Team = () => {
     },
     {
       name: 'Alain BIDUAYA',
-      role: 'Responsable',
+      role: 'Responsable Technique',
       description: 'Membre de l\'équipe COMETECH, engagé dans la réussite de vos projets digitaux.',
       photo: '/images/equipe/responsable3.png',
       email: 'a48672768@gmail.com',
-      phone: '',
+      phone: '+243 978 864 001',
     },
   ]
 

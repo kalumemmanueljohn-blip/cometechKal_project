@@ -866,6 +866,14 @@ const Team = () => {
       email: 'jonathanodia97@gmail.com',
       phone: '+243 840 475 933',
     },
+    {
+      name: 'Alain BIDUAYA',
+      role: 'Responsable',
+      description: 'Membre de l\'équipe COMETECH, engagé dans la réussite de vos projets digitaux.',
+      photo: '/images/equipe/responsable3.png',
+      email: 'a48672768@gmail.com',
+      phone: '',
+    },
   ]
 
   return (
@@ -881,7 +889,7 @@ const Team = () => {
           </p>
         </div>
 
-        <div className="grid-2">
+        <div className="grid-3">
           {teamMembers.map((member, index) => {
             return (
               <div
@@ -1019,17 +1027,19 @@ const Team = () => {
                       {member.email}
                     </a>
                   </div>
-                  <div style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '8px',
-                    justifyContent: 'center',
-                  }}>
-                    <Phone size={12} style={{ color: '#d4a853', flexShrink: 0 }} />
-                    <span style={{ fontSize: '11px', color: '#5a6480' }}>
-                      {member.phone}
-                    </span>
-                  </div>
+                  {member.phone && (
+                    <div style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '8px',
+                      justifyContent: 'center',
+                    }}>
+                      <Phone size={12} style={{ color: '#d4a853', flexShrink: 0 }} />
+                      <span style={{ fontSize: '11px', color: '#5a6480' }}>
+                        {member.phone}
+                      </span>
+                    </div>
+                  )}
                 </div>
               </div>
             )

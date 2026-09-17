@@ -11,11 +11,8 @@ const Footer = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '28px', paddingBottom: '28px', borderBottom: '1px solid rgba(212, 168, 83, 0.06)' }} className="footer-grid">
           <div style={{ textAlign: 'center' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
-              <img src="/images/logo-cometechkal.png" alt="CometechKal" style={{ height: '40px', width: 'auto' }} onError={(e) => { e.target.style.display = 'none' }} />
-              <span style={{ fontSize: '18px', fontWeight: 700, color: '#ffffff' }}>Cometech<span style={{ color: '#d4a853' }}>Kal</span></span>
+              <img src="/images/logo-cometechkal.png" alt="CometechKal" style={{ height: '128px', width: 'auto' }} onError={(e) => { e.target.style.display = 'none' }} />
             </div>
-            <p style={{ color: '#d4a853', fontSize: '13px', marginBottom: '2px', fontWeight: 500, letterSpacing: '0.03em' }}>Données. Dynamique. Performance.</p>
-            <p style={{ color: '#d4a853', fontSize: '10px', letterSpacing: '0.05em', opacity: 0.6 }}>Analyser · Concevoir · Développer · Déployer</p>
           </div>
 
           <div style={{ textAlign: 'center' }}>

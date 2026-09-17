@@ -24,13 +24,8 @@ import {
   Star,
   Sparkles
 } from 'lucide-react'
+import dashboardMockup from './assets/dashboard-mockup.svg'
 import './App.css'
-
-// ========================================
-// CONFIGURATION API
-// ========================================
-
-const API_URL = import.meta.env.VITE_API_URL || 'https://cometech.onrender.com/api/v1';
 
 // ========================================
 // PARTICULES GLOBALES
@@ -153,6 +148,14 @@ const SplashScreen = ({ onComplete }) => {
         />
       </div>
 
+      <h1 style={{ marginTop: '20px', fontSize: '3rem', fontWeight: 700, color: '#ffffff', fontFamily: 'Poppins, sans-serif', letterSpacing: '0.05em' }}>
+        <span style={{ color: '#d4a853' }}>COMETECH</span>
+      </h1>
+
+      <p style={{ marginTop: '4px', fontSize: '0.8rem', color: '#5a6480', letterSpacing: '0.15em', textTransform: 'uppercase' }}>
+        DONNÉES · DYNAMIQUE · PERFORMANCE
+      </p>
+
       <div style={{ marginTop: '30px', width: '200px', height: '2px', background: 'rgba(212, 168, 83, 0.1)', borderRadius: '9999px', overflow: 'hidden', position: 'relative' }}>
         <div
           style={{
@@ -209,7 +212,7 @@ const useScrollAnimation = () => {
 }
 
 // ========================================
-// HEADER
+// HEADER - Avec logo agrandi et nom en majuscules
 // ========================================
 const Header = () => {
   const [isOpen, setIsOpen] = React.useState(false)
@@ -225,7 +228,7 @@ const Header = () => {
     e.preventDefault()
     const target = document.querySelector(href)
     if (target) {
-      const offset = 100
+      const offset = 80
       const top = target.getBoundingClientRect().top + window.pageYOffset - offset
       window.scrollTo({ top, behavior: 'smooth' })
     }
@@ -247,7 +250,7 @@ const Header = () => {
         left: 0,
         right: 0,
         zIndex: 9999,
-        height: '156px',
+        height: '80px',
         backgroundColor: '#0a0e17',
         borderBottom: '1px solid rgba(212, 168, 83, 0.1)',
         transition: 'all 0.3s ease',
@@ -258,14 +261,22 @@ const Header = () => {
     >
       <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
         <div className="flex items-center justify-between" style={{ width: '100%' }}>
-          <a href="/" className="flex items-center flex-shrink-0 group">
+          <a href="/" className="flex items-center gap-3 flex-shrink-0 group">
             <img
               src="/images/logo-cometech.png"
               alt="Cometech"
-              style={{ height: '132px', width: 'auto', transition: 'transform 0.3s ease' }}
+              style={{ height: '55px', width: 'auto', transition: 'transform 0.3s ease' }}
               className="hover:scale-105"
               onError={(e) => { e.target.style.display = 'none' }}
             />
+            <div>
+              <span className="text-xl font-bold tracking-tight text-white">
+                <span className="text-gold">COMETECH</span>
+              </span>
+              <p className="text-[10px] text-gray-400 tracking-widest uppercase hidden sm:block">
+                DONNÉES · DYNAMIQUE · PERFORMANCE
+              </p>
+            </div>
           </a>
 
           <nav className="hidden lg:flex items-center gap-6">
@@ -294,7 +305,7 @@ const Header = () => {
         </div>
 
         {isOpen && (
-          <div style={{ position: 'absolute', top: '156px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
+          <div style={{ position: 'absolute', top: '80px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -358,7 +369,7 @@ const Hero = () => {
   return (
     <section
       className="min-h-[90vh] flex items-center relative overflow-hidden"
-      style={{ paddingTop: '156px' }}
+      style={{ paddingTop: '80px' }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-light to-dark" />
       
@@ -1195,7 +1206,7 @@ const Guarantees = () => {
 }
 
 // ========================================
-// CONTACT - AVEC API RENDER
+// CONTACT - Version corrigée pour NestJS
 // ========================================
 const Contact = () => {
   useScrollAnimation()
@@ -1221,7 +1232,8 @@ const Contact = () => {
     setStatus(null)
 
     try {
-      const response = await fetch(`${API_URL}/contact`, {
+      // ===== BACKEND NESTJS SUR LE PORT 3001 =====
+      const response = await fetch('http://localhost:3001/api/v1/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1234,8 +1246,6 @@ const Contact = () => {
         }),
       })
 
-      const result = await response.json()
-
       if (response.ok) {
         setStatus('success')
         setFormData({
@@ -1246,14 +1256,10 @@ const Contact = () => {
           service_type: '',
           message: '',
         })
-        // Réinitialiser le message de succès après 5 secondes
-        setTimeout(() => setStatus(null), 5000)
       } else {
-        console.error('Erreur API:', result)
         setStatus('error')
       }
-    } catch (error) {
-      console.error('Erreur de connexion:', error)
+    } catch {
       setStatus('error')
     } finally {
       setIsSubmitting(false)
@@ -1411,14 +1417,10 @@ const Contact = () => {
             </button>
 
             {status === 'success' && (
-              <p className="mt-2 text-gold text-center text-xs">
-                ✅ Votre demande a été envoyée avec succès ! Vous recevrez un email de confirmation.
-              </p>
+              <p className="mt-2 text-gold text-center text-xs">Votre demande a été envoyée avec succès !</p>
             )}
             {status === 'error' && (
-              <p className="mt-2 text-red-400 text-center text-xs">
-                ❌ Une erreur est survenue. Veuillez réessayer ou nous contacter directement par téléphone.
-              </p>
+              <p className="mt-2 text-red-400 text-center text-xs">Une erreur est survenue. Veuillez réessayer.</p>
             )}
           </form>
 
@@ -1679,14 +1681,14 @@ const Footer = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '28px', paddingBottom: '28px', borderBottom: '1px solid rgba(212, 168, 83, 0.06)' }} className="footer-grid">
           
           <div style={{ textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
-              <img 
-                src="/images/logo-cometech.png" 
-                alt="Cometech" 
-                style={{ height: '140px', width: 'auto' }}
-                onError={(e) => { e.target.style.display = 'none' }} 
-              />
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
+              <img src="/images/logo-cometech.png" alt="Cometech" style={{ height: '40px', width: 'auto' }} onError={(e) => { e.target.style.display = 'none' }} />
+              <span style={{ fontSize: '22px', fontWeight: 700, color: '#ffffff' }}>
+                <span style={{ color: '#d4a853' }}>COMETECH</span>
+              </span>
             </div>
+            <p style={{ color: '#d4a853', fontSize: '13px', marginBottom: '2px', fontWeight: 500, letterSpacing: '0.03em' }}>Données. Dynamique. Performance.</p>
+            <p style={{ color: '#d4a853', fontSize: '10px', letterSpacing: '0.05em', opacity: 0.6 }}>Analyser · Concevoir · Développer · Déployer</p>
           </div>
 
           <div style={{ textAlign: 'center' }}>
@@ -1726,7 +1728,7 @@ const Footer = () => {
 
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '10px', paddingTop: '16px' }}>
           <p style={{ color: '#3a4258', fontSize: '11px', margin: 0, textAlign: 'center' }}>
-            &copy; {new Date().getFullYear()}. Tous droits réservés.
+            &copy; {new Date().getFullYear()} COMETECH. Tous droits réservés.
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flexWrap: 'wrap', justifyContent: 'center' }}>
             <button

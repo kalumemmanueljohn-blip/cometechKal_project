@@ -29,7 +29,7 @@ const Header = () => {
         left: 0,
         right: 0,
         zIndex: 9999,
-        height: '70px',
+        height: '140px',
         backgroundColor: '#0a0e17',
         borderBottom: '1px solid rgba(212, 168, 83, 0.1)',
         transition: 'all 0.3s ease',
@@ -44,18 +44,10 @@ const Header = () => {
             <img
               src="/images/logo-cometechkal.png"
               alt="CometechKal"
-              style={{ height: '40px', width: 'auto', transition: 'transform 0.3s ease' }}
+              style={{ height: '116px', width: 'auto', transition: 'transform 0.3s ease' }}
               className="hover:scale-105"
               onError={(e) => { e.target.style.display = 'none' }}
             />
-            <div>
-              <span className="text-sm font-bold tracking-tight text-white">
-                Cometech<span className="text-gold">Kal</span>
-              </span>
-              <p className="text-[7px] text-gray-400 tracking-widest uppercase hidden sm:block">
-                Données · Dynamique · Performance
-              </p>
-            </div>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
@@ -86,7 +78,7 @@ const Header = () => {
         </div>
 
         {isOpen && (
-          <div style={{ position: 'absolute', top: '70px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
+          <div style={{ position: 'absolute', top: '140px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
             {navLinks.map((link) => (
               <Link
                 key={link.path}

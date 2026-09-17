@@ -233,7 +233,7 @@ const Header = () => {
     e.preventDefault()
     const target = document.querySelector(href)
     if (target) {
-      const offset = 80
+      const offset = 100
       const top = target.getBoundingClientRect().top + window.pageYOffset - offset
       window.scrollTo({ top, behavior: 'smooth' })
     }
@@ -255,7 +255,7 @@ const Header = () => {
         left: 0,
         right: 0,
         zIndex: 9999,
-        height: '80px',
+        height: '100px',
         backgroundColor: '#0a0e17',
         borderBottom: '1px solid rgba(212, 168, 83, 0.1)',
         transition: 'all 0.3s ease',
@@ -266,22 +266,14 @@ const Header = () => {
     >
       <div className="container" style={{ height: '100%', display: 'flex', alignItems: 'center' }}>
         <div className="flex items-center justify-between" style={{ width: '100%' }}>
-          <a href="/" className="flex items-center gap-3 flex-shrink-0 group">
+          <a href="/" className="flex items-center flex-shrink-0 group">
             <img
               src="/images/logo-cometech.png"
               alt="Cometech"
-              style={{ height: '55px', width: 'auto', transition: 'transform 0.3s ease' }}
+              style={{ height: '75px', width: 'auto', transition: 'transform 0.3s ease' }}
               className="hover:scale-105"
               onError={(e) => { e.target.style.display = 'none' }}
             />
-            <div>
-              <span className="text-xl font-bold tracking-tight text-white">
-                <span className="text-gold">COMETECH</span>
-              </span>
-              <p className="text-[10px] text-gray-400 tracking-widest uppercase hidden sm:block">
-                DONNÉES · DYNAMIQUE · PERFORMANCE
-              </p>
-            </div>
           </a>
 
           <nav className="hidden lg:flex items-center gap-6">
@@ -310,7 +302,7 @@ const Header = () => {
         </div>
 
         {isOpen && (
-          <div style={{ position: 'absolute', top: '80px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
+          <div style={{ position: 'absolute', top: '100px', left: 0, right: 0, backgroundColor: '#0a0e17', borderBottom: '1px solid rgba(212, 168, 83, 0.1)', padding: '20px', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '16px', zIndex: 9999 }}>
             {navLinks.map((link) => (
               <a
                 key={link.label}
@@ -374,7 +366,7 @@ const Hero = () => {
   return (
     <section
       className="min-h-[90vh] flex items-center relative overflow-hidden"
-      style={{ paddingTop: '80px' }}
+      style={{ paddingTop: '100px' }}
     >
       <div className="absolute inset-0 bg-gradient-to-b from-dark via-dark-light to-dark" />
       
@@ -1695,14 +1687,14 @@ const Footer = () => {
         <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '28px', paddingBottom: '28px', borderBottom: '1px solid rgba(212, 168, 83, 0.06)' }} className="footer-grid">
           
           <div style={{ textAlign: 'center' }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '12px', marginBottom: '8px' }}>
-              <img src="/images/logo-cometech.png" alt="Cometech" style={{ height: '40px', width: 'auto' }} onError={(e) => { e.target.style.display = 'none' }} />
-              <span style={{ fontSize: '22px', fontWeight: 700, color: '#ffffff' }}>
-                <span style={{ color: '#d4a853' }}>COMETECH</span>
-              </span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '8px' }}>
+              <img 
+                src="/images/logo-cometech.png" 
+                alt="Cometech" 
+                style={{ height: '80px', width: 'auto' }} 
+                onError={(e) => { e.target.style.display = 'none' }} 
+              />
             </div>
-            <p style={{ color: '#d4a853', fontSize: '13px', marginBottom: '2px', fontWeight: 500, letterSpacing: '0.03em' }}>Données. Dynamique. Performance.</p>
-            <p style={{ color: '#d4a853', fontSize: '10px', letterSpacing: '0.05em', opacity: 0.6 }}>Analyser · Concevoir · Développer · Déployer</p>
           </div>
 
           <div style={{ textAlign: 'center' }}>
